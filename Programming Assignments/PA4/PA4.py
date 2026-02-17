@@ -51,7 +51,7 @@ if play == 'yes':
         else:
             print('Wrong!')
 
-    if guess != secret_animal:
+    if guess != secret_animal:#if they dont guess correct 
         print('Game over! The animal was:', secret_animal)
 
 else:
