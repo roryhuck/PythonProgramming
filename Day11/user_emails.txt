@@ -1,0 +1,144 @@
+Length of first names list: 10
+Length of last names list: 10
+Length of products list: 10
+
+To: rory.huck@redlands.edu
+Subject: Your Favorite Food from Trader Joe’s
+
+Dear Rory Huck,
+
+I know that pasta is one of your favorite foods, and I wanted to let you know that Trader Joe’s has it back in stock.
+
+Next time you go to the store you should check out their selection of pasta so you can stock up!
+
+Enjoy!
+Kindly,
+Rory Huck
+------------------------------
+
+To: whitney.farrell@redlands.edu
+Subject: Your Favorite Food from Trader Joe’s
+
+Dear Whitney Farrell,
+
+I know that pizza is one of your favorite foods, and I wanted to let you know that Trader Joe’s has it back in stock.
+
+Next time you go to the store you should check out their selection of pizza so you can stock up!
+
+Enjoy!
+Kindly,
+Rory Huck
+------------------------------
+
+To: yonte.wickstrom@redlands.edu
+Subject: Your Favorite Food from Trader Joe’s
+
+Dear Yonte Wickstrom,
+
+I know that cookies is one of your favorite foods, and I wanted to let you know that Trader Joe’s has it back in stock.
+
+Next time you go to the store you should check out their selection of cookies so you can stock up!
+
+Enjoy!
+Kindly,
+Rory Huck
+------------------------------
+
+To: zoe.klien@redlands.edu
+Subject: Your Favorite Food from Trader Joe’s
+
+Dear Zoe Klien,
+
+I know that crackers is one of your favorite foods, and I wanted to let you know that Trader Joe’s has it back in stock.
+
+Next time you go to the store you should check out their selection of crackers so you can stock up!
+
+Enjoy!
+Kindly,
+Rory Huck
+------------------------------
+
+To: mary.smith@redlands.edu
+Subject: Your Favorite Food from Trader Joe’s
+
+Dear Mary Smith,
+
+I know that bananas is one of your favorite foods, and I wanted to let you know that Trader Joe’s has it back in stock.
+
+Next time you go to the store you should check out their selection of bananas so you can stock up!
+
+Enjoy!
+Kindly,
+Rory Huck
+------------------------------
+
+To: kim.clark@redlands.edu
+Subject: Your Favorite Food from Trader Joe’s
+
+Dear Kim Clark,
+
+I know that dates is one of your favorite foods, and I wanted to let you know that Trader Joe’s has it back in stock.
+
+Next time you go to the store you should check out their selection of dates so you can stock up!
+
+Enjoy!
+Kindly,
+Rory Huck
+------------------------------
+
+To: jess.patrick@redlands.edu
+Subject: Your Favorite Food from Trader Joe’s
+
+Dear Jess Patrick,
+
+I know that apples is one of your favorite foods, and I wanted to let you know that Trader Joe’s has it back in stock.
+
+Next time you go to the store you should check out their selection of apples so you can stock up!
+
+Enjoy!
+Kindly,
+Rory Huck
+------------------------------
+
+To: sophie.miles@redlands.edu
+Subject: Your Favorite Food from Trader Joe’s
+
+Dear Sophie Miles,
+
+I know that cheese is one of your favorite foods, and I wanted to let you know that Trader Joe’s has it back in stock.
+
+Next time you go to the store you should check out their selection of cheese so you can stock up!
+
+Enjoy!
+Kindly,
+Rory Huck
+------------------------------
+
+To: paige.johnson@redlands.edu
+Subject: Your Favorite Food from Trader Joe’s
+
+Dear Paige Johnson,
+
+I know that ice cream is one of your favorite foods, and I wanted to let you know that Trader Joe’s has it back in stock.
+
+Next time you go to the store you should check out their selection of ice cream so you can stock up!
+
+Enjoy!
+Kindly,
+Rory Huck
+------------------------------
+
+To: emma.adams@redlands.edu
+Subject: Your Favorite Food from Trader Joe’s
+
+Dear Emma Adams,
+
+I know that cake is one of your favorite foods, and I wanted to let you know that Trader Joe’s has it back in stock.
+
+Next time you go to the store you should check out their selection of cake so you can stock up!
+
+Enjoy!
+Kindly,
+Rory Huck
+------------------------------
+
