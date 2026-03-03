@@ -33,6 +33,6 @@ while input('Play some Triva? (yes/no): ').lower() == 'yes':    #starts game loo
         wrong += 1 # update count
 
 with open('TriviaResults.txt', 'a') as f: #opens a results file 
-    f.write(f'Correct: {right}, Incorrect: {wrong}\n') #s
+    f.write(f'Correct: {right}, Incorrect: {wrong}\n') #saves results
 
-print('Done')
+print('Done') #end of trivia
