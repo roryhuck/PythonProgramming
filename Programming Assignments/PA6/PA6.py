@@ -31,7 +31,7 @@ if len(filtered) == 0:
     print(f'No drinks under {max_val} {column} in {choice}.') #prints if no drinks match
 else:
     filtered = filtered.sort_values(column) #sorts drinks by chosen column
-    print(filtered[['Drink', column]]) #prints the filtered drinks with chosen colum
+    print(filtered[['Drink', column]]) #prints the filtered drinks with chosen column
     if input('Save to my_drinks.csv? (yes/no): ').strip().lower() == 'yes':
-        filtered.to_csv('my_drinks.csv', index=False)
-        print('Saved')
+        filtered.to_csv('my_drinks.csv', index=False) #saves to CSV if user says yes 
+        print('Saved') #prints that it is saved 
