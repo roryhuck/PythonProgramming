@@ -1,0 +1,10 @@
+Beverage_category,Beverage,Beverage_prep,Calories,Total Fat (g),Trans Fat (g) ,Saturated Fat (g),Sodium (mg),Total Carbohydrates (g) ,Cholesterol (mg),Dietary Fibre (g),Sugars (g),Protein (g) ,Vitamin A (% DV) ,Vitamin C (% DV),Calcium (% DV) ,Iron (% DV) ,Caffeine (mg),Drink,Protein_per_Cal
+Smoothies,Orange Mango Banana Smoothie,Grande Nonfat Milk,260,1,0.3,0.0,5,120,54,6,37,16.0,50%,80%,10%,30%,15.0,Orange Mango Banana Smoothie - Grande Nonfat Milk,0.06153846153846154
+Smoothies,Orange Mango Banana Smoothie,2% Milk,270,1.5,0.5,0.0,5,125,53,6,37,16.0,50%,80%,10%,6%,0.0,Orange Mango Banana Smoothie - 2% Milk,0.05925925925925926
+Smoothies,Orange Mango Banana Smoothie,Soymilk,270,1.5,0.4,0.0,5,120,53,6,36,15.0,50%,80%,10%,6%,0.0,Orange Mango Banana Smoothie - Soymilk,0.05555555555555555
+Smoothies,Banana Chocolate Smoothie,Grande Nonfat Milk,280,2.5,1.5,0.0,5,150,53,7,34,20.0,10%,15%,20%,0%,0.0,Banana Chocolate Smoothie - Grande Nonfat Milk,0.07142857142857142
+Smoothies,Banana Chocolate Smoothie,Soymilk,290,4.5,1.5,0.0,5,150,51,7,31,19.0,6%,15%,20%,20%,15.0,Banana Chocolate Smoothie - Soymilk,0.06551724137931035
+Smoothies,Strawberry Banana Smoothie,Grande Nonfat Milk,290,1,0.3,0.0,5,125,58,7,41,16.0,4%,100%,10%,8%,0.0,Strawberry Banana Smoothie - Grande Nonfat Milk,0.05517241379310345
+Smoothies,Strawberry Banana Smoothie,2% Milk,290,2,1.0,0.0,5,125,58,7,41,16.0,4%,100%,10%,8%,0.0,Strawberry Banana Smoothie - 2% Milk,0.05517241379310345
+Smoothies,Strawberry Banana Smoothie,Soymilk,290,2,0.4,0.0,5,120,58,8,40,16.0,2%,100%,10%,8%,0.0,Strawberry Banana Smoothie - Soymilk,0.05517241379310345
+Smoothies,Banana Chocolate Smoothie,2% Milk,300,5,2.5,0.1,15,160,53,7,34,20.0,8%,15%,20%,20%,15.0,Banana Chocolate Smoothie - 2% Milk,0.06666666666666667
