@@ -4,15 +4,22 @@ import matplotlib.pyplot as plt
 import tkinter as tk
 from tkinter import messagebox
 
-# symbols
+# Variable/Funtion
 x = sp.symbols('x')
 y = sp.Function('y')
 
-# very simple classification (intentionally basic)
+# Classification of ODE 
 def classify_ode(rhs):
+    try:
+        if sp.separatevars(rhs, symbols=[x, y(x)]):
+            return "Separable"
+    except:
+        pass
+    
     if rhs.has(y(x)):
-        return "has y(x) (maybe linear/nonlinear)"
-    return "no y(x) (maybe separable or simple)"
+        return "First-order linear"
+    
+    return "Unknown"
 
 
 def solve_ode():
@@ -28,7 +35,7 @@ def solve_ode():
         output.insert(tk.END, "Type:\n")
         output.insert(tk.END, classify_ode(rhs) + "\n\n")
 
-        # initial conditions (very basic handling)
+        # initial conditions
         ics = None
         if use_ic.get() == 1:
             try:
@@ -50,7 +57,60 @@ def solve_ode():
     except Exception as e:
         messagebox.showerror("Error", str(e))
 
+def solve_with_steps_gui(rhs_input, ics_input, output_box):
+    output_box.delete("1.0", tk.END)
 
+    try:
+        rhs = sp.sympify(rhs_input)
+    except Exception as e:
+        messagebox.showerror("Error", f"Invalid RHS:\n{e}")
+        return
+
+    ics = None
+    if ics_input.strip():
+        try:
+            ics = eval(ics_input)  # example: {y(0): 1}
+        except:
+            messagebox.showerror("Error", "Invalid ICs format")
+            return
+
+    eq = sp.Eq(sp.diff(y(x), x), rhs)
+
+    output_box.insert(tk.END, "Differential Equation:\n")
+    output_box.insert(tk.END, str(eq) + "\n\n")
+
+    ode_type = classify_ode(rhs)
+    output_box.insert(tk.END, f"Type: {ode_type}\n\n")
+
+#s
+    if ode_type == "Separable":
+        output_box.insert(tk.END, "Step by Step Solution:\n")
+
+        Y = sp.symbols('Y')
+        rhs_temp = rhs.subs(y(x), Y)
+
+        separated = sp.separatevars(rhs_temp, symbols=[x, Y], dict=True)
+
+        if separated:
+            f_x = separated[x]
+            g_y = separated[Y]
+
+            output_box.insert(tk.END, "1) Separate variables:\n")
+            output_box.insert(tk.END, str(sp.Eq(1/g_y * sp.diff(y(x), x), f_x)) + "\n\n")
+
+            output_box.insert(tk.END, "2) Integrate both sides:\n")
+            left = sp.integrate(1/g_y, y(x))
+            right = sp.integrate(f_x, x)
+
+            output_box.insert(tk.END, str(sp.Eq(left, right)) + "\n\n")
+        else:
+            output_box.insert(tk.END, "Could not separate variables.\n\n")
+    try:
+        solution = sp.dsolve(eq, ics=ics) if ics else sp.dsolve(eq)
+        output_box.insert(tk.END, "Final Solution:\n")
+        output_box.insert(tk.END, str(solution))
+    except Exception as e:
+        messagebox.showerror("Solve Error", str(e))
 def plot_sol():
     try:
         f = sp.lambdify(x, last_sol.rhs, "numpy")
@@ -81,7 +141,7 @@ def slope():
         print("solve first")
 
 
-# ---------------- UI (very simple layout) ----------------
+# UI
 root = tk.Tk()
 root.title("ODE solver")
 
