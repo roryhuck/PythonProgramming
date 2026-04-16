@@ -1,4 +1,5 @@
 import sympy as sp
+from sympy import pretty
 import numpy as np
 import matplotlib.pyplot as plt
 import tkinter as tk
@@ -166,7 +167,7 @@ x0_entry.pack()
 tk.Label(root, text="y0").pack()
 y0_entry = tk.Entry(root)
 y0_entry.pack()
-
+# output.insert(tk.END, pretty(eq, use_unicode=True))
 tk.Button(root, text="Solve", command=solve_ode).pack()
 tk.Button(root, text="Solve Separable (Steps)", command=solve_separable_steps).pack()
 tk.Button(root, text="Plot", command=plot_sol).pack()
