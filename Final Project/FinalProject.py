@@ -14,14 +14,13 @@ last_rhs = None
 
 # classify ODE
 def classify_ode(rhs):
-    if rhs.has(y(x)) and rhs.is_add:
-        return "Possibly Linear"
-    try:
-        if sp.separatevars(rhs, symbols=[x, y(x)]):
-            return "Separable"
-    except:
-        pass
-    return "Other"
+    if not rhs.has(y(x)):
+        return "Trivial (no y)"
+
+    if sp.separatevars(rhs, symbols=[x, y(x)]):
+        return "Separable"
+
+    return "Nonlinear"
 
 
 # solve ODE
