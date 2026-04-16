@@ -33,8 +33,12 @@ def solve_ode():
         eq = sp.Eq(sp.diff(y(x), x), rhs)
 
         output.delete("1.0", tk.END)
-        output.insert(tk.END, "ODE:\n" + str(eq) + "\n\n")
-        output.insert(tk.END, "Type:\n" + classify_ode(rhs) + "\n\n")
+
+        output.insert(tk.END, "ODE:\n")
+        output.insert(tk.END, pretty(eq, use_unicode=True) + "\n\n")
+
+        output.insert(tk.END, "Type:\n")
+        output.insert(tk.END, classify_ode(rhs) + "\n\n")
 
         # ICs
         ics = None
@@ -48,7 +52,8 @@ def solve_ode():
 
         sol = sp.dsolve(eq, ics=ics) if ics else sp.dsolve(eq)
 
-        output.insert(tk.END, "Solution:\n" + str(sol))
+        output.insert(tk.END, "Solution:\n")
+        output.insert(tk.END, pretty(sol, use_unicode=True))
 
         last_sol = sol
         last_rhs = rhs
@@ -66,9 +71,8 @@ def solve_separable_steps():
         output.delete("1.0", tk.END)
 
         output.insert(tk.END, "Step 1: Start ODE\n")
-        output.insert(tk.END, str(eq) + "\n\n")
+        output.insert(tk.END, pretty(eq, use_unicode=True) + "\n\n")
 
-        # assume separable form dy/dx = f(x)*g(y)
         Y = sp.symbols('Y')
         rhs_temp = rhs.subs(y(x), Y)
 
@@ -81,28 +85,28 @@ def solve_separable_steps():
         f_x = separated.get(x, 1)
         g_y = separated.get(Y, 1)
 
-        output.insert(tk.END, "Step 2: Rewrite as separable form\n")
-        output.insert(tk.END, "dy/dx = f(x) * g(y)\n\n")
+        output.insert(tk.END, "Step 2: Separable form\n")
+        output.insert(tk.END, "dy/dx = f(x)*g(y)\n\n")
 
-        output.insert(tk.END, "Step 3: Separate variables\n")
+        output.insert(tk.END, "Step 3: Separation\n")
         sep_eq = sp.Eq(1/g_y * sp.diff(y(x), x), f_x)
-        output.insert(tk.END, str(sep_eq) + "\n\n")
+        output.insert(tk.END, pretty(sep_eq, use_unicode=True) + "\n\n")
 
-        output.insert(tk.END, "Step 4: Integrate both sides\n")
+        output.insert(tk.END, "Step 4: Integration\n")
 
         left = sp.integrate(1/g_y, y(x))
         right = sp.integrate(f_x, x)
 
         integrated_eq = sp.Eq(left, right)
-        output.insert(tk.END, str(integrated_eq) + "\n\n")
+        output.insert(tk.END, pretty(integrated_eq, use_unicode=True) + "\n\n")
 
-        output.insert(tk.END, "Step 5: Solve for y (if possible)\n")
+        output.insert(tk.END, "Step 5: Solve for y\n")
 
         try:
             sol = sp.solve(left - right, y(x))
-            output.insert(tk.END, str(sol) + "\n")
+            output.insert(tk.END, pretty(sol, use_unicode=True))
         except:
-            output.insert(tk.END, "Could not explicitly solve for y\n")
+            output.insert(tk.END, "Could not solve explicitly\n")
 
     except Exception as e:
         messagebox.showerror("Error", str(e))
