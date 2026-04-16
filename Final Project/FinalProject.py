@@ -57,49 +57,54 @@ def solve_ode():
 
 
 # step solver
-def solve_with_steps(rhs_input, output_box):
-    output_box.delete("1.0", tk.END)
-
+def solve_separable_steps():
     try:
-        rhs = sp.sympify(rhs_input)
-    except:
-        messagebox.showerror("Error", "Invalid RHS")
-        return
+        rhs = sp.sympify(entry.get())
+        eq = sp.Eq(sp.diff(y(x), x), rhs)
 
-    eq = sp.Eq(sp.diff(y(x), x), rhs)
+        output.delete("1.0", tk.END)
 
-    output_box.insert(tk.END, "ODE:\n" + str(eq) + "\n\n")
-    ode_type = classify_ode(rhs)
-    output_box.insert(tk.END, "Type: " + ode_type + "\n\n")
+        output.insert(tk.END, "Step 1: Start ODE\n")
+        output.insert(tk.END, str(eq) + "\n\n")
 
-    if ode_type == "Separable":
+        # assume separable form dy/dx = f(x)*g(y)
+        Y = sp.symbols('Y')
+        rhs_temp = rhs.subs(y(x), Y)
+
+        separated = sp.separatevars(rhs_temp, symbols=[x, Y], dict=True)
+
+        if not isinstance(separated, dict):
+            output.insert(tk.END, "Not separable.\n")
+            return
+
+        f_x = separated.get(x, 1)
+        g_y = separated.get(Y, 1)
+
+        output.insert(tk.END, "Step 2: Rewrite as separable form\n")
+        output.insert(tk.END, "dy/dx = f(x) * g(y)\n\n")
+
+        output.insert(tk.END, "Step 3: Separate variables\n")
+        sep_eq = sp.Eq(1/g_y * sp.diff(y(x), x), f_x)
+        output.insert(tk.END, str(sep_eq) + "\n\n")
+
+        output.insert(tk.END, "Step 4: Integrate both sides\n")
+
+        left = sp.integrate(1/g_y, y(x))
+        right = sp.integrate(f_x, x)
+
+        integrated_eq = sp.Eq(left, right)
+        output.insert(tk.END, str(integrated_eq) + "\n\n")
+
+        output.insert(tk.END, "Step 5: Solve for y (if possible)\n")
+
         try:
-            Y = sp.symbols('Y')
-            temp = rhs.subs(y(x), Y)
-
-            sep = sp.separatevars(temp, symbols=[x, Y], dict=True)
-
-            if isinstance(sep, dict):
-                f_x = sep.get(x, 1)
-                g_y = sep.get(Y, 1)
-
-                output_box.insert(tk.END, "Separate:\n")
-                output_box.insert(tk.END, str(sp.Eq(sp.diff(y(x), x), f_x * g_y)) + "\n\n")
-
-                left = sp.integrate(1/g_y, Y)
-                right = sp.integrate(f_x, x)
-
-                output_box.insert(tk.END, "Integrate:\n")
-                output_box.insert(tk.END, str(sp.Eq(left, right)) + "\n\n")
-
+            sol = sp.solve(left - right, y(x))
+            output.insert(tk.END, str(sol) + "\n")
         except:
-            output_box.insert(tk.END, "Could not separate\n")
+            output.insert(tk.END, "Could not explicitly solve for y\n")
 
-    try:
-        sol = sp.dsolve(eq)
-        output_box.insert(tk.END, "Final:\n" + str(sol))
-    except:
-        messagebox.showerror("Error", "Solve failed")
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
 
 
 # plot solution
@@ -163,6 +168,7 @@ y0_entry = tk.Entry(root)
 y0_entry.pack()
 
 tk.Button(root, text="Solve", command=solve_ode).pack()
+tk.Button(root, text="Solve Separable (Steps)", command=solve_separable_steps).pack()
 tk.Button(root, text="Plot", command=plot_sol).pack()
 tk.Button(root, text="Slope", command=slope).pack()
 
