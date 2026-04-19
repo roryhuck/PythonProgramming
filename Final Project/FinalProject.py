@@ -1,9 +1,8 @@
 #IMPORTANT NOTE: 
-# All three of these sites were building blocks for creating the code I have down below
-# This was my first time 
-#“Tkinter — Python Interface to Tcl/Tk.” Python Software Foundation, https://docs.python.org/3/library/tkinter.html. Accessed 18 Apr. 2026.
-#“Ordinary Differential Equations.” SymPy Documentation, https://docs.sympy.org/latest/modules/solvers/ode.html. Accessed 18 Apr. 2026.
-# Bader, Dan. “Python GUI Programming With Tkinter.” Real Python, https://realpython.com/python-gui-tkinter/. Accessed 18 Apr. 2026.
+# All three of these sites were building blocks for creating the code I have down below. This was my first time working with Tkinter and these websites helped a lot with writing this code
+#“Tkinter — Python Interface to Tcl/Tk.” Python Software Foundation, https://docs.python.org/3/library/tkinter.html. Accessed 10 Apr. 2026.
+#“Ordinary Differential Equations.” SymPy Documentation, https://docs.sympy.org/latest/modules/solvers/ode.html. Accessed 10 Apr. 2026.
+# Bader, Dan. “Python GUI Programming With Tkinter.” Real Python, https://realpython.com/python-gui-tkinter/. Accessed 10 Apr. 2026.
 #Imports
 import sympy as sp
 from sympy import pretty
