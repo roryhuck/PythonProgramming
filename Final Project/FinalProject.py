@@ -13,6 +13,47 @@ last_sol = None
 last_rhs = None
 
 
+# classes
+class ODESolver:
+    def __init__(self, rhs_expr):
+        self.rhs = rhs_expr
+        self.eq = sp.Eq(sp.diff(y(x), x), self.rhs)
+
+    def classify_ode(self):
+        if not self.rhs.has(y(x)):
+            return "Trivial (no y)"
+
+        if sp.separatevars(self.rhs, symbols=[x, y(x)]):
+            return "Separable"
+
+        return "Nonlinear"
+
+    def solve(self, ics=None):
+        result = sp.dsolve(self.eq, ics=ics)
+
+        if isinstance(result, list):
+            return result[0]
+
+        return result
+
+    def separable_steps(self):
+        Y = sp.symbols('Y')
+        rhs_temp = self.rhs.subs(y(x), Y)
+
+        separated = sp.separatevars(rhs_temp, symbols=[x, Y], dict=True)
+
+        if not isinstance(separated, dict):
+            return None
+
+        f_x = separated.get(x, 1)
+        g_y = separated.get(Y, 1)
+
+        left = sp.integrate(1/g_y, y(x))
+        right = sp.integrate(f_x, x)
+
+        return sp.Eq(left, right)
+
+
 # classify ODE
 def classify_ode(rhs):
     if not rhs.has(y(x)):
@@ -30,7 +71,9 @@ def solve_ode():
 
     try:
         rhs = sp.sympify(entry.get())
-        eq = sp.Eq(sp.diff(y(x), x), rhs)
+
+        solver = ODESolver(rhs)
+        eq = solver.eq
 
         output.delete("1.0", tk.END)
 
@@ -38,7 +81,7 @@ def solve_ode():
         output.insert(tk.END, pretty(eq, use_unicode=True) + "\n\n")
 
         output.insert(tk.END, "Type:\n")
-        output.insert(tk.END, classify_ode(rhs) + "\n\n")
+        output.insert(tk.END, solver.classify_ode() + "\n\n")
 
         # ICs
         ics = None
@@ -50,7 +93,13 @@ def solve_ode():
             except:
                 output.insert(tk.END, "Bad ICs\n")
 
-        sol = sp.dsolve(eq, ics=ics) if ics else sp.dsolve(eq)
+        sol_raw = solver.solve(ics)
+
+        # handle list output safely
+        if isinstance(sol_raw, list):
+            sol = sol_raw[0]
+        else:
+            sol = sol_raw
 
         output.insert(tk.END, "Solution:\n")
         output.insert(tk.END, pretty(sol, use_unicode=True))
@@ -66,47 +115,21 @@ def solve_ode():
 def solve_separable_steps():
     try:
         rhs = sp.sympify(entry.get())
-        eq = sp.Eq(sp.diff(y(x), x), rhs)
+        solver = ODESolver(rhs)
 
         output.delete("1.0", tk.END)
 
         output.insert(tk.END, "Step 1: Start ODE\n")
-        output.insert(tk.END, pretty(eq, use_unicode=True) + "\n\n")
+        output.insert(tk.END, pretty(solver.eq, use_unicode=True) + "\n\n")
 
-        Y = sp.symbols('Y')
-        rhs_temp = rhs.subs(y(x), Y)
+        result = solver.separable_steps()
 
-        separated = sp.separatevars(rhs_temp, symbols=[x, Y], dict=True)
-
-        if not isinstance(separated, dict):
+        if result is None:
             output.insert(tk.END, "Not separable.\n")
             return
 
-        f_x = separated.get(x, 1)
-        g_y = separated.get(Y, 1)
-
-        output.insert(tk.END, "Step 2: Separable form\n")
-        output.insert(tk.END, "dy/dx = f(x)*g(y)\n\n")
-
-        output.insert(tk.END, "Step 3: Separation\n")
-        sep_eq = sp.Eq(1/g_y * sp.diff(y(x), x), f_x)
-        output.insert(tk.END, pretty(sep_eq, use_unicode=True) + "\n\n")
-
-        output.insert(tk.END, "Step 4: Integration\n")
-
-        left = sp.integrate(1/g_y, y(x))
-        right = sp.integrate(f_x, x)
-
-        integrated_eq = sp.Eq(left, right)
-        output.insert(tk.END, pretty(integrated_eq, use_unicode=True) + "\n\n")
-
-        output.insert(tk.END, "Step 5: Solve for y\n")
-
-        try:
-            sol = sp.solve(left - right, y(x))
-            output.insert(tk.END, pretty(sol, use_unicode=True))
-        except:
-            output.insert(tk.END, "Could not solve explicitly\n")
+        output.insert(tk.END, "Step 2: Integrated form\n")
+        output.insert(tk.END, pretty(result, use_unicode=True))
 
     except Exception as e:
         messagebox.showerror("Error", str(e))
@@ -171,6 +194,7 @@ x0_entry.pack()
 tk.Label(root, text="y0").pack()
 y0_entry = tk.Entry(root)
 y0_entry.pack()
+
 tk.Button(root, text="Solve", command=solve_ode).pack()
 tk.Button(root, text="Solve Separable (Steps)", command=solve_separable_steps).pack()
 tk.Button(root, text="Plot", command=plot_sol).pack()
