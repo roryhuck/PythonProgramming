@@ -1,0 +1,84 @@
+# ODE Solver with Tkinter GUI
+
+## Author
+Rory Huck  
+Professor Bieri  
+Python Programming  
+April 22, 2026  
+
+---
+
+## Project Overview
+This project is an Ordinary Differential Equation (ODE) solver and classifier built in Python using SymPy, NumPy, Matplotlib, and Tkinter. The inspiration for this project came from a differential equations course, where a quick tool for checking homework problems and visualizing slope fields was needed.
+
+The goal of this program is to allow users to input differential equations, classify them, solve them symbolically when possible, and visualize both the solutions and slope fields to better understand the behavior of the system.
+
+---
+
+## Features
+- Accepts ODE input in the form: dy/dx = F(x, y(x))
+- Supports optional initial conditions
+- Classifies ODEs as:
+  - Separable
+  - Linear
+  - Unknown
+- Solves ODEs symbolically using SymPy
+- Provides step-by-step solutions (when applicable)
+- Generates solution graphs and slope field visualizations
+- Displays results through a Tkinter GUI
+
+---
+
+## Program Structure
+
+### Tkinter GUI Version
+- Runs through the terminal
+- Provides a simple graphical interface
+- Allows users to input equations without coding
+- Displays results and graphs in pop-up windows
+
+### Jupyter Notebook Version
+- Designed for exploring the math and logic
+- Allows direct interaction with code
+- Shows step-by-step computation process
+
+Both versions use the same core solving functions and produce identical results.
+
+---
+
+## Limitations
+- SymPy may struggle with more complex or non-standard ODEs
+- Tkinter interface is intentionally simple and not highly customizable
+- Output formatting may occasionally be difficult to interpret in advanced cases
+- Not optimized for highly complex symbolic systems
+
+---
+
+## How to Run
+
+### Install Dependencies
+```bash
+pip install sympy numpy matplotlib
+```
+
+### Run Tkinter Version
+```bash
+python FinalProject.py
+```
+
+Make sure the `.py` file is in your working directory. The program will guide you through input step-by-step.
+
+---
+
+## Conclusion
+This project combines symbolic computation and visualization to help users better understand ordinary differential equations. It bridges the gap between solving equations mathematically and interpreting their graphical behavior.
+
+---
+
+## Works Cited
+
+“Tkinter — Python Interface to Tcl/Tk.” Python Software Foundation, https://docs.python.org/3/library/tkinter.html. Accessed 10 Apr. 2026.
+
+“Ordinary Differential Equations.” SymPy Documentation, https://docs.sympy.org/latest/modules/solvers/ode.html. Accessed 10 Apr. 2026.
+
+Bader, Dan. “Python GUI Programming With Tkinter.” Real Python, https://realpython.com/python-gui-tkinter/. Accessed 10 Apr. 2026.
